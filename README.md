@@ -39,7 +39,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Sync Issue Metadata to PR
+      - name: Set PR Assignees and Reviewers
         uses: jinhokim98/project-flow-set-pr-assignees-and-reviewers@v1
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
@@ -91,7 +91,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Sync Issue Metadata to PR
+      - name: Set PR Assignees and Reviewers
         uses: jinhokim98/project-flow-set-pr-assignees-and-reviewers@v1
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
