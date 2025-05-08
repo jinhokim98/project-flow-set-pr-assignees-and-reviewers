@@ -14,10 +14,15 @@ async function run() {
     const owner = context.repo.owner;
     const repo = context.repo.repo;
 
-    const assignees = getInput('assignees')
-      ?.split(',')
-      .map(s => s.trim())
-      .filter(Boolean) || [context.payload.pull_request?.user.login];
+    const assigneesInput = getInput('assignees');
+    const assignees =
+      assigneesInput && assigneesInput.trim()
+        ? assigneesInput
+            .split(',')
+            .map(s => s.trim())
+            .filter(Boolean)
+        : [context.payload.pull_request?.user.login];
+
     const reviewers =
       getInput('reviewers')
         ?.split(',')

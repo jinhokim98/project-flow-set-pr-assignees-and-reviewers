@@ -34395,10 +34395,13 @@ async function run() {
             throw new Error('이 워크플로우는 PR 이벤트에서만 실행되어야 합니다.');
         const owner = github.context.repo.owner;
         const repo = github.context.repo.repo;
-        const assignees = (0,core.getInput)('assignees')
-            ?.split(',')
-            .map(s => s.trim())
-            .filter(Boolean) || [github.context.payload.pull_request?.user.login];
+        const assigneesInput = (0,core.getInput)('assignees');
+        const assignees = assigneesInput && assigneesInput.trim()
+            ? assigneesInput
+                .split(',')
+                .map(s => s.trim())
+                .filter(Boolean)
+            : [github.context.payload.pull_request?.user.login];
         const reviewers = (0,core.getInput)('reviewers')
             ?.split(',')
             .map(s => s.trim())
