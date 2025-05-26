@@ -23,11 +23,13 @@ async function run() {
             .filter(Boolean)
         : [context.payload.pull_request?.user.login];
 
+    const prAuthor = context.payload.pull_request?.user.login;
     const reviewers =
       getInput('reviewers')
         ?.split(',')
         .map(s => s.trim())
-        .filter(Boolean) || [];
+        .filter(r => r && r !== prAuthor) || [];
+
     const teamReviewers =
       getInput('team_reviewers')
         ?.split(',')

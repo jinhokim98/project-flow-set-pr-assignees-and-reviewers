@@ -34402,10 +34402,11 @@ async function run() {
                 .map(s => s.trim())
                 .filter(Boolean)
             : [github.context.payload.pull_request?.user.login];
+        const prAuthor = github.context.payload.pull_request?.user.login;
         const reviewers = (0,core.getInput)('reviewers')
             ?.split(',')
             .map(s => s.trim())
-            .filter(Boolean) || [];
+            .filter(r => r && r !== prAuthor) || [];
         const teamReviewers = (0,core.getInput)('team_reviewers')
             ?.split(',')
             .map(s => s.trim())
